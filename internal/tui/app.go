@@ -109,7 +109,7 @@ func (m Model) submitInput() (tea.Model, tea.Cmd) {
 		MaxTokens:    api.DefaultMaxTokens,
 	}
 
-	m.eventChan, m.resultChan = m.queryEngine.Query(context.Background(), params)
+	m.eventChan, m.resultChan = m.QueryEngine.Query(context.Background(), params)
 
 	return m, m.waitForEvents()
 }

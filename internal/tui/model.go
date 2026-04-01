@@ -19,7 +19,7 @@ type Model struct {
 	loading  bool
 	ready    bool
 
-	queryEngine *query.Engine
+	QueryEngine *query.Engine
 	eventChan   <-chan query.StreamEvent
 	resultChan  <-chan query.QueryResult
 }
