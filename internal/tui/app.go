@@ -18,10 +18,23 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.Type {
-		case tea.KeyCtrlC, tea.KeyCtrlD:
+		case tea.KeyCtrlC:
+			if m.loading {
+				m.cancel()
+				m.loading = false
+				return m, nil
+			}
 			return m, tea.Quit
+
+		case tea.KeyCtrlD:
+			return m, tea.Quit
+
+		case tea.KeyEscape:
+			m.input.SetValue("")
+			return m, nil
+
 		case tea.KeyEnter:
-			if m.input.Value() != "" {
+			if m.input.Value() != "" && !m.loading {
 				return m.submitInput()
 			}
 		}
@@ -102,6 +115,8 @@ func (m Model) submitInput() (tea.Model, tea.Cmd) {
 	m.viewport.SetContent(m.renderMessages())
 	m.loading = true
 
+	m.ctx, m.cancel = context.WithCancel(context.Background())
+
 	params := query.QueryParams{
 		Messages:     m.messages[:len(m.messages)-1],
 		SystemPrompt: []string{"You are a helpful coding assistant."},
@@ -109,7 +124,7 @@ func (m Model) submitInput() (tea.Model, tea.Cmd) {
 		MaxTokens:    api.DefaultMaxTokens,
 	}
 
-	m.eventChan, m.resultChan = m.QueryEngine.Query(context.Background(), params)
+	m.eventChan, m.resultChan = m.QueryEngine.Query(m.ctx, params)
 
 	return m, m.waitForEvents()
 }

@@ -266,7 +266,7 @@ Potential features for future development / 未來開發的潛在功能：
 
 - [ ] **Permission Dialog / 權限對話框** - Allow/Deny buttons / 允許/拒絕按鈕
 - [ ] **Input Handling /輸入處理** - Multi-line, history navigation / 多行輸入、歷史導航
-- [ ] **Keyboard Shortcuts / 鍵盤快捷鍵** - Ctrl+C, Ctrl+D, Escape
+- ✅ **Keyboard Shortcuts / 鍵盤快捷鍵** (Ctrl+C, Ctrl+D, Escape)
 
 ### Advanced Features (P1/P2 - Optional) /進階功能 (P1/P2 - 可選)
 

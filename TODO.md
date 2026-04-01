@@ -23,6 +23,7 @@
 - [x] Message Rendering / 訊息渲染
 - [x] Streaming Event Handling / 串流事件處理
 - [x] Concurrent Tool Execution / 工具並行執行
+- [x] Keyboard Shortcuts / 鍵盤快捷鍵 (Ctrl+C, Ctrl+D, Escape)
 
 ---
 
@@ -127,14 +128,14 @@
     - [ ] History navigation (up/down keys) / 歷史導航
     - [ ] Paste handling / 貼上處理
 
-- [ ] **Keyboard Shortcuts / 鍵盤快捷鍵**
+- [x] **Keyboard Shortcuts / 鍵盤快捷鍵**
   - 功能: Essential keyboard controls / 基本鍵盤控制
   - 預估工時 / Est. Hours: 1h
   - 子任務 / Subtasks:
-    - [ ] Enter: Submit / 提交
-    - [ ] Ctrl+C: Interrupt / 中斷
-    - [ ] Ctrl+D: Exit / 退出
-    - [ ] Escape: Cancel / 取消
+    - [x] Enter: Submit / 提交
+    - [x] Ctrl+C: Interrupt / 中斷
+    - [x] Ctrl+D: Exit / 退出
+    - [x] Escape: Cancel / 取消
 
 ---
 
@@ -186,10 +187,10 @@
 
 | 項目 / Item | 數量 / Count |
 |-------------|-------------|
-| 已完成 / Completed | 11 |
-| 待實作 (P0) / Pending (P0) | 9 主要任務 / main tasks |
+| 已完成 / Completed | 12 |
+| 待實作 (P0) / Pending (P0) | 8 主要任務 / main tasks |
 | 待實作 (P1/P2) / Pending (P1/P2) | 5 主要任務 / main tasks |
-| 完成率 / Completion Rate | ~55% |
+| 完成率 / Completion Rate | ~60% |
 
 ---
 

@@ -1,6 +1,8 @@
 package tui
 
 import (
+	"context"
+
 	"github.com/charmbracelet/bubbles/spinner"
 	"github.com/charmbracelet/bubbles/textinput"
 	"github.com/charmbracelet/bubbles/viewport"
@@ -22,6 +24,9 @@ type Model struct {
 	QueryEngine *query.Engine
 	eventChan   <-chan query.StreamEvent
 	resultChan  <-chan query.QueryResult
+
+	ctx    context.Context
+	cancel context.CancelFunc
 }
 
 func InitialModel() Model {
@@ -34,11 +39,15 @@ func InitialModel() Model {
 	s := spinner.New()
 	s.Spinner = spinner.Dot
 
+	ctx, cancel := context.WithCancel(context.Background())
+
 	return Model{
 		input:    ti,
 		viewport: vp,
 		spinner:  s,
 		messages: []*types.Message{},
+		ctx:      ctx,
+		cancel:   cancel,
 	}
 }
 
