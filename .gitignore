@@ -10,8 +10,29 @@ bin/
 *.test
 *.out
 
+# Test coverage
+coverage.out
+*.cover
+.coverage/
+*.coverprofile
+
 # Go workspace
 go.work
+go.work.sum
+
+# Dependency management
+vendor/
+Gopkg.lock
+Gopkg.toml
+
+# Logs and temporary files
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
 
 # IDE
 .idea/
@@ -23,5 +44,18 @@ go.work
 .DS_Store
 Thumbs.db
 
+# Environment and sensitive files
+.env
+.env.*
+!.env.example
+credentials.json
+secrets.json
+*.pem
+*.key
+
 # Claude Code
 .claude/
+
+# Build artifacts
+dist/
+build/
