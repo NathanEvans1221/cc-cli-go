@@ -17,6 +17,20 @@
 - **API Errors**: API 錯誤處理（連線/認證/速率限制/逾時）。
 - **Tool Errors**: 工具錯誤處理（權限/輸入驗證/執行/檔案操作）。
 
+#### 環境壓縮 / Context Compaction
+
+- **Context Compaction System**: 自動環境壓縮系統，當對話超過閾值時自動摘要舊訊息。
+- **Summary Generation**: 智能摘要生成，提取主題、工具使用統計。
+- **Manual Compaction**: 支援手動壓縮功能。
+- **Token Estimation**: Token 估算與閾值檢測。
+
+#### 程式碼品質 / Code Quality
+
+- **Package Documentation**: 核心模組完整 Package 註解。
+- **Type Documentation**: 所有公開類型詳細註解。
+- **Function Documentation**: 重要函數功能說明。
+- **Code Readability**: 程式碼可讀性改善。
+
 #### 設定管理 / Configuration Management
 
 - **Configuration System**: 完整設定管理系統，支援全域與專案設定檔。
