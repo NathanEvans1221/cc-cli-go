@@ -24,14 +24,14 @@
 **來源**: `src/entrypoints/cli.tsx`, `src/main.tsx`
 
 **功能**:
-- [ ] 基本命令列參數解析
-- [ ] `-p` / `--print` 非互動模式
-- [ ] `--version` 版本顯示
-- [ ] `--help` 幫助信息
-- [ ] `-c` / `--continue` 繼續上次會話
-- [ ] `--resume <session-id>` 恢復指定會話
-- [ ] `--model <model>` 指定模型
-- [ ] `[prompt]` 直接輸入提示
+- [x] 基本命令列參數解析
+- [x] `-p` / `--print` 非互動模式
+- [x] `--version` 版本顯示
+- [x] `--help` 幫助信息
+- [x] `-c` / `--continue` 繼續上次會話
+- [x] `--resume <session-id>` 恢復指定會話
+- [x] `--model <model>` 指定模型
+- [x] `[prompt]` 直接輸入提示
 
 **Go 技術**: `cobra` + `pflag`
 
@@ -44,19 +44,19 @@
 **來源**: `src/services/api/claude.ts`
 
 **功能**:
-- [ ] 建構 API request (system prompt, messages, tools)
-- [ ] SSE streaming 連接
-- [ ] Event parsing:
-  - [ ] `message_start`
-  - [ ] `content_block_start` (text, thinking, tool_use)
-  - [ ] `content_block_delta` (text, input_json_delta)
-  - [ ] `content_block_stop`
-  - [ ] `message_delta` (stop_reason, usage)
-  - [ ] `message_stop`
-  - [ ] `ping`
-  - [ ] `error`
-- [ ] Error handling (rate limit, overload, network)
-- [ ] Token usage tracking
+- [x] 建構 API request (system prompt, messages, tools)
+- [x] SSE streaming 連接
+- [x] Event parsing:
+  - [x] `message_start`
+  - [x] `content_block_start` (text, thinking, tool_use)
+  - [x] `content_block_delta` (text, input_json_delta)
+  - [x] `content_block_stop`
+  - [x] `message_delta` (stop_reason, usage)
+  - [x] `message_stop`
+  - [x] `ping`
+  - [x] `error`
+- [x] Error handling (rate limit, overload, network)
+- [x] Token usage tracking
 
 **Go 技術**: `net/http`, `bufio.Scanner`, `encoding/json`
 
@@ -80,13 +80,13 @@ content-type: application/json
 **來源**: `src/query.ts`
 
 **功能**:
-- [ ] Message 管理 (append, compact boundary)
-- [ ] System prompt 注入
-- [ ] Streaming response 處理
-- [ ] Tool use 檢測與觸發
-- [ ] Tool result 收集
-- [ ] 多輪對話循環
-- [ ] Interrupt handling (Ctrl+C)
+- [x] Message 管理 (append, compact boundary)
+- [x] System prompt 注入
+- [x] Streaming response 處理
+- [x] Tool use 檢測與觸發
+- [x] Tool result 收集
+- [x] 多輪對話循環
+- [x] Interrupt handling (Ctrl+C)
 
 **核心邏輯**:
 ```
@@ -146,12 +146,12 @@ type Tool interface {
 **來源**: `src/utils/permissions/`, `src/hooks/useCanUseTool.tsx`
 
 **功能**:
-- [ ] Permission modes: `default`, `accept`, `plan`, `auto`
-- [ ] Permission rules (allow, deny, ask)
-- [ ] Rule matching (tool name + input pattern)
-- [ ] Interactive permission dialog (TUI)
-- [ ] Rule persistence (settings.json)
-- [ ] Dangerous command detection
+- [x] Permission modes: `default`, `accept`, `plan`, `auto`
+- [x] Permission rules (allow, deny, ask)
+- [x] Rule matching (tool name + input pattern)
+- [x] Interactive permission dialog (TUI)
+- [x] Rule persistence (settings.json)
+- [x] Dangerous command detection
 
 **Permission Rule 格式**:
 ```json
@@ -171,14 +171,14 @@ type Tool interface {
 **來源**: `src/context.ts`, `src/utils/claudemd.ts`
 
 **功能**:
-- [ ] Git status (`git status --porcelain`)
-- [ ] Git branch (`git branch --show-current`)
-- [ ] Current working directory
-- [ ] Date/time
-- [ ] CLAUDE.md 發現與讀取
-  - [ ] 從當前目錄往上搜尋
-  - [ ] 合併所有找到的 CLAUDE.md
-- [ ] Memory files (可選)
+- [x] Git status (`git status --porcelain`)
+- [x] Git branch (`git branch --show-current`)
+- [x] Current working directory
+- [x] Date/time
+- [x] CLAUDE.md 發現與讀取
+  - [x] 從當前目錄往上搜尋
+  - [x] 合併所有找到的 CLAUDE.md
+- [x] Memory files (可選)
 
 **預估工時**: 2-3 小時
 
@@ -189,12 +189,12 @@ type Tool interface {
 **來源**: `src/utils/sessionStorage.ts`, `src/utils/conversationRecovery.ts`
 
 **功能**:
-- [ ] Session ID 生成
-- [ ] Transcript 儲存 (JSONL 格式)
-- [ ] Session metadata
-- [ ] Session 列表查詢
-- [ ] Session 恢復 (resume)
-- [ ] Session 清理 (舊會話)
+- [x] Session ID 生成
+- [x] Transcript 儲存 (JSONL 格式)
+- [x] Session metadata
+- [x] Session 列表查詢
+- [x] Session 恢復 (resume)
+- [x] Session 清理 (舊會話)
 
 **檔案結構**:
 ```
@@ -219,11 +219,11 @@ type Tool interface {
 **來源**: `src/screens/REPL.tsx`
 
 **功能**:
-- [ ] 主界面佈局
-- [ ] 用戶輸入區
-- [ ] 訊息列表顯示
-- [ ] Loading spinner
-- [ ] Status bar (model, tokens, etc.)
+- [x] 主界面佈局
+- [x] 用戶輸入區
+- [x] 訊息列表顯示
+- [x] Loading spinner
+- [x] Status bar (model, tokens, etc.)
 
 **Bubble Tea 模型**:
 ```go
@@ -249,13 +249,13 @@ func (m Model) View() string
 **來源**: `src/components/Messages.tsx`, `src/components/MessageRow.tsx`
 
 **功能**:
-- [ ] User message rendering
-- [ ] Assistant message rendering (text, thinking)
-- [ ] Tool use message rendering (collapsed/expanded)
-- [ ] Tool result message rendering
-- [ ] System message rendering
-- [ ] Code syntax highlighting (可選)
-- [ ] Markdown rendering (可選)
+- [x] User message rendering
+- [x] Assistant message rendering (text, thinking)
+- [x] Tool use message rendering (collapsed/expanded)
+- [x] Tool result message rendering
+- [x] System message rendering
+- [x] Code syntax highlighting (可選)
+- [x] Markdown rendering (可選)
 
 **預估工時**: 4-5 小時
 
@@ -266,10 +266,10 @@ func (m Model) View() string
 **來源**: `src/components/permissions/`
 
 **功能**:
-- [ ] Tool use 請求顯示
-- [ ] Allow / Deny / Always Allow / Always Deny 按鈕
-- [ ] Input preview (檔案路徑, 命令等)
-- [ ] 鍵盤導航
+- [x] Tool use 請求顯示
+- [x] Allow / Deny / Always Allow / Always Deny 按鈕
+- [x] Input preview (檔案路徑, 命令等)
+- [x] 鍵盤導航
 
 **預估工時**: 3-4 小時
 
@@ -280,15 +280,15 @@ func (m Model) View() string
 **來源**: `src/components/PromptInput/`
 
 **功能**:
-- [ ] Multi-line input
-- [ ] History navigation (上/下鍵)
-- [ ] Auto-completion (可選)
-- [ ] Paste handling
-- [ ] Keyboard shortcuts:
-  - [ ] Enter: Submit
-  - [ ] Ctrl+C: Interrupt
-  - [ ] Ctrl+D: Exit
-  - [ ] Escape: Cancel current action
+- [x] Multi-line input
+- [x] History navigation (上/下鍵)
+- [x] Auto-completion (可選)
+- [x] Paste handling
+- [x] Keyboard shortcuts:
+  - [x] Enter: Submit
+  - [x] Ctrl+C: Interrupt
+  - [x] Ctrl+D: Exit
+  - [x] Escape: Cancel current action
 
 **預估工時**: 3-4 小時
 
@@ -301,9 +301,9 @@ func (m Model) View() string
 **來源**: `src/services/compact/`
 
 **功能**:
-- [ ] Auto-compact when context exceeds threshold
-- [ ] Manual `/compact` command
-- [ ] Summary generation
+- [x] Auto-compact when context exceeds threshold
+- [x] Manual `/compact` command
+- [x] Summary generation
 
 **預估工時**: 4-6 小時
 
@@ -332,10 +332,10 @@ func (m Model) View() string
 **來源**: `src/utils/config.ts`, `src/utils/settings/`
 
 **功能**:
-- [ ] Global settings (`~/.claude/settings.json`)
-- [ ] Project settings (`.claude/settings.json`)
-- [ ] Settings schema validation
-- [ ] Settings hot-reload
+- [x] Global settings (`~/.claude/settings.json`)
+- [x] Project settings (`.claude/settings.json`)
+- [x] Settings schema validation
+- [x] Settings hot-reload
 
 **預估工時**: 2-3 小時
 
@@ -487,27 +487,27 @@ func (m Model) View() string
 
 ### Phase 1 完成標準
 
-- [ ] 可以啟動 CLI 並顯示幫助
-- [ ] 可以輸入提示並獲得回應
-- [ ] 可以執行 Bash 命令 (經過權限確認)
-- [ ] 可以讀取、編輯、寫入檔案
-- [ ] 可以搜尋檔案 (Glob, Grep)
-- [ ] 可以恢復之前的會話
-- [ ] 可以看到 CLAUDE.md 的內容被注入
+- [x] 可以啟動 CLI 並顯示幫助
+- [x] 可以輸入提示並獲得回應
+- [x] 可以執行 Bash 命令 (經過權限確認)
+- [x] 可以讀取、編輯、寫入檔案
+- [x] 可以搜尋檔案 (Glob, Grep)
+- [x] 可以恢復之前的會話
+- [x] 可以看到 CLAUDE.md 的內容被注入
 
 ### Phase 2 完成標準
 
-- [ ] TUI 顯示正常
-- [ ] 可以滾動查看歷史訊息
-- [ ] 可以用鍵盤操作 (導航、提交、中斷)
-- [ ] 權限對話框可以正常運作
+- [x] TUI 顯示正常
+- [x] 可以滾動查看歷史訊息
+- [x] 可以用鍵盤操作 (導航、提交、中斷)
+- [x] 權限對話框可以正常運作
 
 ### 最終驗收
 
-- [ ] 所有核心工具可以正常運作
-- [ ] 長對話不會出現記憶體問題
-- [ ] 錯誤處理完善
-- [ ] 文檔完整
+- [x] 所有核心工具可以正常運作
+- [x] 長對話不會出現記憶體問題
+- [x] 錯誤處理完善
+- [x] 文檔完整
 
 ---
 
