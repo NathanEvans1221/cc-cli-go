@@ -9,6 +9,14 @@
 
 ### 新增功能 / Added
 
+#### 錯誤處理 / Error Handling
+
+- **Unified Error Types**: 統一錯誤類型系統，支援 API/Tool/Permission/Config/Session/Internal 錯誤。
+- **Error Wrapping**: 錯誤包裝器，支援錯誤鏈與上下文資訊。
+- **User-friendly Messages**: 使用者友善錯誤訊息，包含建議解決方案。
+- **API Errors**: API 錯誤處理（連線/認證/速率限制/逾時）。
+- **Tool Errors**: 工具錯誤處理（權限/輸入驗證/執行/檔案操作）。
+
 #### 設定管理 / Configuration Management
 
 - **Configuration System**: 完整設定管理系統，支援全域與專案設定檔。

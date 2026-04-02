@@ -187,10 +187,10 @@
 
 | 項目 / Item | 數量 / Count |
 |-------------|-------------|
-| 已完成 / Completed | 24 |
+| 已完成 / Completed | 25 |
 | 待實作 (P0) / Pending (P0) | 0 主要任務 / main tasks |
-| 待實作 (P1/P2) / Pending (P1/P2) | 3 主要任務 / main tasks |
-| 完成率 / Completion Rate | ~89% |
+| 待實作 (P1/P2) / Pending (P1/P2) | 2 主要任務 / main tasks |
+| 完成率 / Completion Rate | ~93% |
 
 ---
 
