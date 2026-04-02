@@ -7,6 +7,7 @@ import (
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 
+	"github.com/liao-eli/cc-cli-go/internal/config"
 	envctx "github.com/liao-eli/cc-cli-go/internal/context"
 	"github.com/liao-eli/cc-cli-go/internal/permission"
 	"github.com/liao-eli/cc-cli-go/internal/query"
@@ -61,8 +62,35 @@ func InitialModel() Model {
 	}
 }
 
-func InitialModelWithSession(sess *session.Session) Model {
-	m := InitialModel()
+func InitialModelWithSettings(settings *config.Settings) Model {
+	input := NewInput()
+
+	vp := viewport.New(80, 20)
+
+	s := spinner.New()
+	s.Spinner = spinner.Dot
+
+	ctx, cancel := context.WithCancel(context.Background())
+	contextInfo, _ := envctx.BuildContext()
+
+	checker := permission.NewChecker(settings.GetPermissionMode())
+	checker.SetRules(settings.ToPermissionRules())
+
+	return Model{
+		input:       input,
+		viewport:    vp,
+		spinner:     s,
+		messages:    []*types.Message{},
+		ctx:         ctx,
+		cancel:      cancel,
+		contextInfo: contextInfo,
+		session:     session.NewSession(contextInfo.WorkingDir),
+		permChecker: checker,
+	}
+}
+
+func InitialModelWithSessionAndSettings(sess *session.Session, settings *config.Settings) Model {
+	m := InitialModelWithSettings(settings)
 	m.session = sess
 	m.messages = sess.Messages
 	return m

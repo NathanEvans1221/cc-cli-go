@@ -8,6 +8,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/liao-eli/cc-cli-go/internal/api"
+	"github.com/liao-eli/cc-cli-go/internal/config"
 	"github.com/liao-eli/cc-cli-go/internal/query"
 	"github.com/liao-eli/cc-cli-go/internal/session"
 	"github.com/liao-eli/cc-cli-go/internal/tools"
@@ -41,6 +42,19 @@ func runInteractive(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("ANTHROPIC_API_KEY environment variable is required")
 	}
 
+	settings, err := config.Load()
+	if err != nil {
+		fmt.Printf("Warning: Could not load settings: %v\n", err)
+		settings = config.DefaultSettings()
+	}
+
+	if errors := settings.Validate(); len(errors) > 0 {
+		fmt.Printf("Warning: Settings validation errors:\n")
+		for _, e := range errors {
+			fmt.Printf("  - %s\n", e.Error())
+		}
+	}
+
 	client := api.NewClient(apiKey)
 
 	toolReg := tools.NewRegistry()
@@ -66,12 +80,12 @@ func runInteractive(cmd *cobra.Command, args []string) error {
 
 		if err != nil {
 			fmt.Printf("Warning: Could not resume session: %v\n", err)
-			model = tui.InitialModel()
+			model = tui.InitialModelWithSettings(settings)
 		} else {
-			model = tui.InitialModelWithSession(sess)
+			model = tui.InitialModelWithSessionAndSettings(sess, settings)
 		}
 	} else {
-		model = tui.InitialModel()
+		model = tui.InitialModelWithSettings(settings)
 	}
 
 	model.QueryEngine = engine

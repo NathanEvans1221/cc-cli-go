@@ -151,14 +151,17 @@
 
 #### Configuration Management 設定管理
 
-- [ ] **Configuration Management / 設定管理**
+- [x] **Configuration Management / 設定管理** ✅
   - 功能: Settings files management / 設定檔管理
-  - 預估工時 / Est. Hours: 2-3h
-  - 位置: `internal/config/`
-  - 子任務 / Subtasks:
-    - [ ] Global settings (`~/.claude/settings.json`) / 全域設定
-    - [ ] Project settings (`.claude/settings.json`) /專案設定
-    - [ ] Settings schema validation / 設定驗證
+  - 實作位置: `internal/config/`
+  - 特性:
+    - Global settings (`~/.claude/settings.json`) / 全域設定
+    - Project settings (`.claude/settings.json`) / 專案設定
+    - Settings validation / 設定驗證
+    - Settings merging / 設定合併
+    - Permission mode & rules configuration / 權限模式與規則設定
+    - API configuration / API 設定
+    - Config Tests (74.5% coverage, 20 tests)
 
 #### Quality Assurance 品質保證
 
@@ -184,10 +187,10 @@
 
 | 項目 / Item | 數量 / Count |
 |-------------|-------------|
-| 已完成 / Completed | 21 |
+| 已完成 / Completed | 24 |
 | 待實作 (P0) / Pending (P0) | 0 主要任務 / main tasks |
-| 待實作 (P1/P2) / Pending (P1/P2) | 5 主要任務 / main tasks |
-| 完成率 / Completion Rate | ~81% |
+| 待實作 (P1/P2) / Pending (P1/P2) | 3 主要任務 / main tasks |
+| 完成率 / Completion Rate | ~89% |
 
 ---
 
@@ -197,11 +200,11 @@
 
 恭喜！所有 P0 必要功能已實作完成！
 
-### Sprint 6: P1 增強功能 / P1 Enhancement Features
+### Sprint 6: 剩餘 P1/P2 功能 / Remaining P1/P2 Features
 
 1. Context Compaction / 環境壓縮 (4-6h)
-2. Configuration Management / 設定管理 (2-3h)
-3. Improved Error Handling / 增強錯誤處理 (2-3h)
+2. Improved Error Handling / 增強錯誤處理 (2-3h)
+3. Code Quality & Documentation / 程式碼品質與文件
 
 ---
 

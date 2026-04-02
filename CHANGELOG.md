@@ -9,6 +9,16 @@
 
 ### 新增功能 / Added
 
+#### 設定管理 / Configuration Management
+
+- **Configuration System**: 完整設定管理系統，支援全域與專案設定檔。
+- **Settings Structure**: 支援權限模式、權限規則、工具設定、API 設定。
+- **Global Settings**: `~/.claude/settings.json` 全域設定檔。
+- **Project Settings**: `.claude/settings.json` 專案設定檔，覆蓋全域設定。
+- **Settings Validation**: 完整設定驗證功能，確保設定格式正確。
+- **Settings Merging**: 專案設定優先於全域設定，自動合併機制。
+- **Config Tests**: 20 個測試案例，覆蓋率 74.5%。
+
 #### 測試框架 / Testing Framework
 
 - **TESTING.md**: 完整測試策略文件，包含測試原則、工具、範例與最佳實踐。
