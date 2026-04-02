@@ -12,7 +12,10 @@ import (
 	"github.com/liao-eli/cc-cli-go/internal/tools"
 	"github.com/liao-eli/cc-cli-go/internal/tools/bash"
 	"github.com/liao-eli/cc-cli-go/internal/tools/edit"
+	"github.com/liao-eli/cc-cli-go/internal/tools/glob"
+	"github.com/liao-eli/cc-cli-go/internal/tools/grep"
 	"github.com/liao-eli/cc-cli-go/internal/tools/read"
+	"github.com/liao-eli/cc-cli-go/internal/tools/write"
 	"github.com/liao-eli/cc-cli-go/internal/tui"
 )
 
@@ -38,6 +41,9 @@ func runInteractive(cmd *cobra.Command, args []string) error {
 	toolReg.Register(bash.New())
 	toolReg.Register(read.New())
 	toolReg.Register(edit.New())
+	toolReg.Register(write.New())
+	toolReg.Register(glob.New())
+	toolReg.Register(grep.New())
 
 	engine := query.NewEngine(client, toolReg)
 

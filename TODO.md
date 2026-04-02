@@ -1,6 +1,6 @@
 # TODO - cc-cli-go 開發任務清單 / Development Task List
 
-> **狀態更新日期 / Status Update Date**: 2026-04-01
+> **狀態更新日期 / Status Update Date**: 2026-04-02
 > **預估工時 / Estimated Hours**: ~25-35 小時 / hours
 
 ---
@@ -16,6 +16,9 @@
 - [x] Bash Tool / Bash 工具 (Execute shell commands / 執行 shell 命令)
 - [x] Read Tool / Read 工具 (Read file contents / 讀取檔案內容)
 - [x] Edit Tool / Edit 工具 (Edit files by exact string replacement / 字串替換編輯檔案)
+- [x] Write Tool / Write 工具 (Create new files / 建立新檔案 - 若檔案已存在則拒絕)
+- [x] Glob Tool / Glob 工具 (File pattern matching / 檔案模式匹配)
+- [x] Grep Tool / Grep 工具 (Search file contents / 搜尋檔案內容 - 支援正則表達式)
 
 **Phase 2: TUI (基本) / Basic TUI**
 
@@ -33,21 +36,19 @@
 
 #### Tools 工具
 
-- [ ] **Write Tool / Write 工具**
+- [x] **Write Tool / Write 工具** ✅
   - 功能: Create new files / 建立新檔案
-  - 預估工時 / Est. Hours: 1h
-  - 位置: `internal/tools/write/write.go`
+  - 實作位置: `internal/tools/write/write.go`
+  - 特性: 若檔案已存在則拒絕，支援自動建立父目錄
 
-- [ ] **Glob Tool / Glob 工具**
+- [x] **Glob Tool / Glob 工具** ✅
   - 功能: File pattern matching / 檔案模式匹配
-  - 預估工時 / Est. Hours: 1.5h
-  - 位置: `internal/tools/glob/glob.go`
+  - 實作位置: `internal/tools/glob/glob.go`
   - 技術: `path/filepath.Glob`
 
-- [ ] **Grep Tool / Grep 工具**
+- [x] **Grep Tool / Grep 工具** ✅
   - 功能: Search file contents / 搜尋檔案內容
-  - 預估工時 / Est. Hours: 2h
-  - 位置: `internal/tools/grep/grep.go`
+  - 實作位置: `internal/tools/grep/grep.go`
   - 技術: `regexp`, `bufio.Scanner`
 
 #### Permission System 權限系統
@@ -187,40 +188,33 @@
 
 | 項目 / Item | 數量 / Count |
 |-------------|-------------|
-| 已完成 / Completed | 12 |
-| 待實作 (P0) / Pending (P0) | 8 主要任務 / main tasks |
+| 已完成 / Completed | 15 |
+| 待實作 (P0) / Pending (P0) | 5 主要任務 / main tasks |
 | 待實作 (P1/P2) / Pending (P1/P2) | 5 主要任務 / main tasks |
-| 完成率 / Completion Rate | ~60% |
+| 完成率 / Completion Rate | ~75% |
 
 ---
 
 ## 🎯 下一步優先順序 / Next Priority Order
 
-### Sprint 1: 核心工具 / Core Tools (建議先完成 / Recommended First)
+### Sprint 2: 環境建構 / Context Building (當前階段 / Current Sprint)
 
-1. Write Tool / Write 工具 (1h)
-2. Glob Tool / Glob 工具 (1.5h)
-3. Grep Tool / Grep 工具 (2h)
-
-### Sprint 2: 環境建構 / Context Building
-
-4. Context Building / 環境建構 (2-3h)
-5. CLAUDE.md Discovery / CLAUDE.md 發現 (1h)
+1. Context Building / 環境建構 (2-3h)
+2. CLAUDE.md Discovery / CLAUDE.md 發現 (1h)
 
 ### Sprint 3: 權限系統 / Permission System
 
-6. Permission System / 權限系統 (4-5h)
-7. Permission Dialog / 權限對話框 (3-4h)
+3. Permission System / 權限系統 (4-5h)
+4. Permission Dialog / 權限對話框 (3-4h)
 
 ### Sprint 4: 會話管理 / Session Management
 
-8. Session Storage / 會話儲存 (3-4h)
-9. Resume Functionality / 恢復功能 (1h)
+5. Session Storage / 會話儲存 (3-4h)
+6. Resume Functionality / 恢復功能 (1h)
 
 ### Sprint 5: TUI 增強 / TUI Enhancement
 
-10. Input Handling /輸入處理 (3-4h)
-11. Keyboard Shortcuts / 鍵盤快捷鍵 (1h)
+7. Input Handling /輸入處理 (3-4h)
 
 ---
 
@@ -256,4 +250,4 @@ type Tool interface {
 
 ---
 
-*最後更新 / Last Updated: 2026-04-01*
+*最後更新 / Last Updated: 2026-04-02*
