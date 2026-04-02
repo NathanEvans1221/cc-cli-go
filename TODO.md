@@ -35,6 +35,19 @@
 - [x] Permission System / 權限系統 (工具核准對話框、權限模式、危險命令檢測)
 - [x] Permission Dialog / 權限對話框 (互動式權限 UI、Allow/Deny 選項)
 
+**Phase 1.8: TUI 增強 / TUI Enhancement**
+
+- [x] Input Handling / 輸入處理 ✅
+  - 功能: Enhanced input controls / 增強輸入控制
+  - 實作位置: `internal/tui/input.go`
+  - 特性:
+    - Multi-line input / 多行輸入（使用 textarea.Model）
+    - History navigation (up/down keys) / 歷史導航
+    - Paste handling / 貼上處理
+    - Auto height adjustment / 自動調整高度
+    - History management (max 1000 items) / 歷史管理
+    - 16 test cases, all passing ✅
+
 **Phase 2: TUI (基本) / Basic TUI**
 
 - [x] Basic TUI / 基本 TUI (Bubble Tea framework / Bubble Tea 框架)
@@ -184,9 +197,11 @@
 
 恭喜！所有 P0 必要功能已實作完成！
 
-### Sprint 5: TUI 增強 / TUI Enhancement (P1 - 可選 / Optional)
+### Sprint 6: P1 增強功能 / P1 Enhancement Features
 
-1. Input Handling /輸入處理 (3-4h)
+1. Context Compaction / 環境壓縮 (4-6h)
+2. Configuration Management / 設定管理 (2-3h)
+3. Improved Error Handling / 增強錯誤處理 (2-3h)
 
 ---
 

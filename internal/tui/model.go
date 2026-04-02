@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/charmbracelet/bubbles/spinner"
-	"github.com/charmbracelet/bubbles/textinput"
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 
@@ -16,7 +15,7 @@ import (
 )
 
 type Model struct {
-	input    textinput.Model
+	input    Input
 	viewport viewport.Model
 	spinner  spinner.Model
 
@@ -38,9 +37,7 @@ type Model struct {
 }
 
 func InitialModel() Model {
-	ti := textinput.New()
-	ti.Placeholder = "Type your message..."
-	ti.Focus()
+	input := NewInput()
 
 	vp := viewport.New(80, 20)
 
@@ -52,7 +49,7 @@ func InitialModel() Model {
 	contextInfo, _ := envctx.BuildContext()
 
 	return Model{
-		input:       ti,
+		input:       input,
 		viewport:    vp,
 		spinner:     s,
 		messages:    []*types.Message{},
@@ -73,7 +70,6 @@ func InitialModelWithSession(sess *session.Session) Model {
 
 func (m Model) Init() tea.Cmd {
 	return tea.Batch(
-		textinput.Blink,
 		spinner.Tick,
 	)
 }

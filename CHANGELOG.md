@@ -41,7 +41,12 @@
 - **Context Building**: 自動收集環境資訊（工作目錄、Git 狀態、Git 分支、日期時間），並加入 system prompt。
 - **CLAUDE.md Discovery**: 自動從當前目錄向上搜尋 CLAUDE.md 和 GEMINI.md 檔案，並合併至 system prompt。
 
-#### 會話管理 / Session Management
+#### TUI 增強 / TUI Enhancement
+
+- **Input Handling**: 多行輸入支援，歷史導航（up/down 鍵），貼上處理，自動調整高度。
+- **Textarea Integration**: 使用 textarea.Model 取代 textinput.Model，支援多行編輯。
+- **History Management**: 命令歷史管理（最多 1000 條），支援歷史導航。
+- **Smart Navigation**: 智能導航（單行模式時啟用歷史導航，多行模式時保留游標移動）。
 
 - **Session Storage**: 會話持久化功能，支援 JSONL 格式儲存對話記錄與元資料。
 - **Resume Functionality**: 恢復會話功能，支援 `-c` / `--continue` 繼續上次會話，`--resume <session-id>` 恢復指定會話。

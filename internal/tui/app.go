@@ -109,7 +109,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	}
 
 	var cmd tea.Cmd
-	m.input, cmd = m.input.Update(msg)
+	cmd = m.input.Update(msg)
 	cmds = append(cmds, cmd)
 
 	m.viewport, cmd = m.viewport.Update(msg)
@@ -148,7 +148,9 @@ func (m Model) View() string {
 
 func (m Model) submitInput() (tea.Model, tea.Cmd) {
 	text := m.input.Value()
-	m.input.SetValue("")
+	m.input.Clear()
+
+	m.input.AddToHistory(text)
 
 	userMsg := types.NewUserMessage(text)
 	m.messages = append(m.messages, userMsg)
