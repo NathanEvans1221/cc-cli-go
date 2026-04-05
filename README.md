@@ -134,6 +134,14 @@ git clone <repository-url> cc-cli-go
 cd cc-cli-go
 ```
 
+### Windows 11 Example / Windows 11 範例
+
+```powershell
+cd D:\github\chiisen
+git clone <repository-url> cc-cli-go
+cd cc-cli-go
+```
+
 ### Install Dependencies / 安裝依賴
 
 ```bash
@@ -145,6 +153,9 @@ go mod download
 ```bash
 # Build binary / 建構二進位檔
 go build -o bin/cc-cli-go ./cmd/cc-cli-go
+
+# Windows 11: build with .exe extension / Windows 11: 使用 .exe 副檔名建構
+go build -o bin/cc-cli-go.exe ./cmd/cc-cli-go
 
 # Or use go install / 或使用 go install
 go install ./cmd/cc-cli-go
@@ -160,6 +171,18 @@ go install ./cmd/cc-cli-go
 export ANTHROPIC_API_KEY="your-api-key-here"
 ```
 
+### Windows 11 PowerShell / Windows 11 PowerShell
+
+```powershell
+$env:ANTHROPIC_API_KEY = "your-api-key-here"
+```
+
+### Windows 11 CMD / Windows 11 CMD
+
+```cmd
+setx ANTHROPIC_API_KEY "your-api-key-here"
+```
+
 ### Run Interactive Mode / 執行互動模式
 
 ```bash
@@ -170,11 +193,31 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 go run ./cmd/cc-cli-go run
 ```
 
+### Windows 11 Run / Windows 11 執行
+
+```powershell
+# If you built with .exe / 如果已建構為 .exe
+.\bin\cc-cli-go.exe run
+
+# If you built without .exe / 如果沒有 .exe 副檔名
+.\bin\cc-cli-go run
+```
+
 ### Check Version / 檢查版本
 
 ```bash
 ./bin/cc-cli-go --version
 # Output /輸出: cc-cli-go version 0.1.0
+```
+
+### Windows 11 Check Version / Windows 11 檢查版本
+
+```powershell
+# If you built with .exe / 如果已建構為 .exe
+.\bin\cc-cli-go.exe --version
+
+# If you built without .exe / 如果沒有 .exe 副檔名
+.\bin\cc-cli-go --version
 ```
 
 ### Available Commands / 可用命令
