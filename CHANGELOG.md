@@ -12,16 +12,16 @@
 #### 文件 / Documentation
 
 - **AI Agent 協作規則**: 新增 `AGENTS.md`，整合 Graphify 知識圖譜導引與 AI 協作協定 (AACS)。
-
-### 移除 / Removed
-
-- **Codex 鉤子**: 移除並排除 `.codex/hooks.json`，改為僅追蹤 `AGENTS.md`。
 - **README 文件索引**: 新增 `Documentation Index`，集中列出根目錄與 `docs/` 下所有 Markdown 文件連結與簡介。
 - **README 維護規則**: 新增 `Documentation Maintenance Rules`，規範 `.md` 異動時同步更新索引與核心文件一致性。
 - **TECH_DECISIONS 名詞解釋**: 新增 `名詞解釋 / Glossary` 章節，補充 ADR 相關術語與本專案實作對應。
 - **OPEN_QUESTIONS**: 新增 `docs/OPEN_QUESTIONS.md`，集中整理待分析議題與討論方向。
 - **OPEN_QUESTIONS 擴充**: 新增由 `GO_MODULE_STRUCTURE`、`GO_ARCHITECTURE`、`IMPLEMENTATION_PLAN`、`CORE_FEATURES` 延伸的研究題目。
 - **OPEN_QUESTIONS 狀態整理**: 新增 `待完成事項 / Unfinished Items`，明確標注尚未完成的文件與研究工作。
+
+### 移除 / Removed
+
+- **Codex 鉤子**: 移除並排除 `.codex/hooks.json`，改為僅追蹤 `AGENTS.md`。
 
 #### 錯誤處理 / Error Handling
 
@@ -114,19 +114,6 @@
 - Anthropic API 串流客戶端（SSE）
 - 查詢迴圈（Channel-based streaming）
 - 工具系統（Interface-based, extensible）
-
-#### ✅ 進展 / Progress
-- ✅ 27/27 任務完成 (100%)
-- ✅ 163 測試案例全通過 (82.8% coverage)
-- ✅ 排除並移除 `.codex/hooks.json`
-- ✅ 所有 P0/P1/P2 功能完成
-- ✅ Git 已推送到 origin/master
-
-## 🚀 下一步 / Next Steps
-專案維護與持續優化。
-
----
-*更新時間: 2026-04-10*
 
 #### 工具 / Tools
 
