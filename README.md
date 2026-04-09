@@ -390,6 +390,36 @@ For comprehensive graph exploration, visualization, and detailed community analy
 Full audit report: `graphify-out/GRAPH_REPORT.md`
 完整審計報告：`graphify-out/GRAPH_REPORT.md`
 
+#### 🔄 Graph Updates & Caching / 圖表更新與快取
+
+The knowledge graph is designed for **incremental updates**. When you modify source files:
+
+知識圖表支援**增量更新**。當修改源碼檔案時：
+
+```bash
+# Update graph after code changes / 代碼變更後更新圖表
+/graphify --update
+
+# Deep semantic re-extraction (slower, comprehensive) / 深度語義提取（較慢，全面）
+/graphify --update --mode deep
+```
+
+**Cache Strategy / 快取策略：**
+
+- **Cache location**: `graphify-out/cache/` (~370 KB)
+- **快取位置**: `graphify-out/cache/` (~370 KB)
+
+| Operation / 操作 | Cache Impact / 快取影響 | Speed / 速度 |
+|-----------------|----------------------|-----------|
+| **First `--update` (with cache)** | Reuse existing extractions / 重用現有提取 | 🟢 Normal (30s) |
+| **First `--update` (no cache)** | Re-extract all files / 重新提取所有檔案 | 🔴 Slow (90s) |
+| **Delete `graphify-out/cache/`** | Will auto-rebuild on next run / 下次執行時自動重建 | ⚠️ Next run slower, then normal |
+
+**Recommendation / 建議：**
+- Cache is auto-ignored in `.gitignore` (keep locally for speed) / 快取已加入 `.gitignore`（本地保留以加快速度）
+- Commit only: `graph.html`, `GRAPH_REPORT.md`, `graph.json`, `cost.json`
+- Safe to delete cache anytime (will auto-rebuild) / 可安心刪除快取（會自動重建）
+
 ---
 
 ### Project Statistics /專案統計
