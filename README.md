@@ -282,6 +282,116 @@ go test ./internal/tools/bash
 
 ## Development /開發
 
+### Knowledge Graph Analysis / 知識圖表分析
+
+A complete semantic analysis of the codebase has been performed using graphify. The results provide insights into module interconnections, architecture patterns, and potential refactoring opportunities.
+
+**已使用 graphify 對程式碼庫進行完整的語義分析。結果提供模組相互連接、架構模式與潛在重構機會的洞見。**
+
+#### 📊 Graph Statistics / 圖表統計
+
+| Metric / 指標 | Value / 數值 |
+|---------------|--------------|
+| **Nodes / 節點** | 521 |
+| **Edges / 邊** | 600 |
+| **Communities / 社群** | 54 |
+| **Edge Type Distribution / 邊類型分布** | 98% EXTRACTED · 2% INFERRED |
+
+#### 💎 God Nodes - Core Abstractions / 核心抽象
+
+These are the most connected components in the system:
+
+最連接的系統元件：
+
+| Rank / 排名 | Node / 節點 | Edges / 邊 | Role / 角色 |
+|-------------|-----------|-----------|-----------|
+| 1 | **Input** | 14 | User input handling / 使用者輸入處理 |
+| 2 | **BashTool** | 9 | Shell command execution / Shell 命令執行 |
+| 3 | **EditTool** | 9 | File editing operations / 檔案編輯操作 |
+| 4 | **GlobTool** | 9 | File pattern matching / 檔案模式匹配 |
+| 5 | **GrepTool** | 9 | File content search / 檔案內容搜尋 |
+| 6 | **ReadTool** | 9 | File reading operations / 檔案讀取操作 |
+| 7 | **WriteTool** | 9 | File creation operations / 檔案建立操作 |
+| 8 | **Settings** | 8 | Configuration management / 設定管理 |
+| 9 | **Model** | 8 | TUI application state / TUI 應用狀態 |
+| 10 | **Compactor** | 7 | Context compression / 環境壓縮 |
+
+#### 🔗 Surprising Connections - Cross-Module Bridges / 跨界連結
+
+These connections reveal non-obvious relationships between modules:
+
+這些連結揭示模組之間非顯而易見的關係：
+
+1. **Testing Strategy ↔ Testing Framework** (TESTING.md → CHANGELOG.md)
+   - _Cross-document validation: Testing strategy connects to changelog patterns_
+   - _跨文件驗證：測試策略與 Changelog 模式相連_
+
+2. **Permission System Implementation ↔ Permission System Modes** (docs/CORE_FEATURES.md → CHANGELOG.md)
+   - _Design documentation links to version history decisions_
+   - _設計文件連結至版本歷史決策_
+
+3. **27 Completed Features ↔ Core Features Overview** (TODO.md → README.md)
+   - _Progress tracking integrates with feature documentation_
+   - _進度追蹤與功能文件整合_
+
+4. **Tool System Components ↔ Technical Decisions**
+   - _Implementation details validated against ADRs (Architecture Decision Records)_
+   - _實作細節與 ADRs 驗證對應_
+
+5. **CLI Entry ↔ Language Selection (ADR-001)**
+   - _Argument parsing decisions justified by Go language choice_
+   - _參數解析決策由 Go 語言選擇驗證_
+
+#### 🎯 Community Structure - Major Module Clusters / 社群結構
+
+Top 5 most cohesive communities:
+
+最內聚的 5 個社群：
+
+| Community / 社群 | Nodes / 節點 | Cohesion / 凝聚度 | Core Components / 核心元件 |
+|-----------------|-----------|------------------|------------------------|
+| **Anthropic API Client** | 12 | 0.06 | Client, Event, StreamEvent, BuildContext |
+| **Bash Tool** | 2 | 0.08 | BashTool, EditTool integration |
+| **Configuration Management** | 14 | 0.14 | APISettings, Load, PermissionRule |
+| **Grep Tool** | 8 | 0.16 | compileIncludePattern, walkDirectory |
+| **User Input System** | 3 | 0.19 | Input, InputMode, NewInput |
+
+#### ⚠️ Suggested Improvements / 建議改進
+
+Based on graph analysis, these architectural recommendations emerge:
+
+基於圖表分析，這些架構建議出現：
+
+1. **API Client Refactoring** (Low cohesion: 0.06)
+   - Consider splitting into smaller, focused submodules
+   - 考慮分割為更小的集中子模組
+   - Current size: 12 nodes with weak interconnections
+   - 現有規模：12 個節點，弱連接
+
+2. **Streaming Events Documentation**
+   - 61 weakly-connected nodes detected (MessageStartEvent, ContentBlockDeltaEvent, etc.)
+   - 檢測到 61 個弱連接節點
+   - Add explicit relationship documentation in code comments
+   - 在代碼註解中添加明確的關係文件
+
+3. **Tool System Consolidation** (Query Loop, API, Tools tightly coupled)
+   - These components form a hyperedge with 0.95 confidence
+   - 這些元件形成 0.95 置信度的超邊
+   - Consider extracting shared abstractions
+   - 考慮提取共用抽象
+
+#### 📈 Full Analysis / 完整分析
+
+For comprehensive graph exploration, visualization, and detailed community analysis:
+
+**Browse the interactive graph: `graphify-out/graph.html`**
+**查看互動式圖表：`graphify-out/graph.html`**
+
+Full audit report: `graphify-out/GRAPH_REPORT.md`
+完整審計報告：`graphify-out/GRAPH_REPORT.md`
+
+---
+
 ### Project Statistics /專案統計
 
 | Item / 項目               | Value /數值                                           |
