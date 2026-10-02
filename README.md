@@ -57,9 +57,28 @@ cc-cli-go/
 │   ├── cli/                     # CLI framework / CLI 框架
 │   │   ├── root.go              # Root command /根命令
 │   │   └── run.go               # Interactive mode command /互動模式命令
+│   ├── compact/                 # Context compaction / 環境壓縮
+│   │   └── compactor.go
+│   ├── config/                  # Settings load and merge / 設定載入與合併
+│   │   ├── config.go
+│   │   └── validation.go
+│   ├── context/                 # Workspace context and CLAUDE.md / 工作區環境
+│   │   ├── context.go
+│   │   └── claudemd.go
+│   ├── errors/                  # API and tool errors / API 與工具錯誤
+│   │   ├── errors.go
+│   │   ├── api_errors.go
+│   │   └── tool_errors.go
+│   ├── permission/              # Permission modes and rules / 權限模式與規則
+│   │   ├── types.go
+│   │   └── dangerous.go
 │   ├── query/                   # Query engine / 查詢引擎
 │   │   ├── engine.go            # Core query loop /核心查詢迴圈
 │   │   └── types.go             # Query types / 查詢類型
+│   ├── session/                 # Session persistence / 會話持久化
+│   │   └── session.go
+│   ├── testutil/                # Test helpers / 測試輔助
+│   │   └── testutil.go
 │   ├── tools/                   # Tool system / 工具系統
 │   │   ├── tool.go              # Tool interface / 工具介面
 │   │   ├── registry.go          # Tool registry / 工具註冊
@@ -67,8 +86,14 @@ cc-cli-go/
 │   │   │   └── bash.go          # Bash tool / Bash 工具
 │   │   ├── edit/
 │   │   │   └── edit.go          # Edit tool / Edit 工具
-│   │   └── read/
-│   │       └── read.go          # Read tool / Read 工具
+│   │   ├── glob/
+│   │   │   └── glob.go          # Glob tool / Glob 工具
+│   │   ├── grep/
+│   │   │   └── grep.go          # Grep tool / Grep 工具
+│   │   ├── read/
+│   │   │   └── read.go          # Read tool / Read 工具
+│   │   └── write/
+│   │       └── write.go         # Write tool / Write 工具
 │   ├── tui/                     # Terminal UI /終端 UI
 │   │   ├── app.go               # Bubble Tea app / Bubble Tea應用
 │   │   └── model.go             # TUI model / TUI 模型

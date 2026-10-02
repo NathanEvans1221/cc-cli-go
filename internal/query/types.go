@@ -12,6 +12,7 @@ type QueryParams struct {
 	Tools             []tools.Tool
 	Model             string
 	MaxTokens         int
+	MaxTurns          int
 	PermissionChecker *permission.Checker
 }
 
