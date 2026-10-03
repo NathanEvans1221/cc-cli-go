@@ -7,11 +7,17 @@
 
 ## [Unreleased]
 
+### 測試 / Tests
+
+- **覆蓋率**: 為 `cli`、`compact`、`errors`、`types`、`tools` registry、`testutil` 補上單元測試，並為 API 串流與 TUI 啟動、按鍵、權限對話補上可執行路徑。
+
 ### 移除 / Removed
 
 - **CI/CD 任務**: 從待辦移除 CI/CD、GitHub Actions、Makefile 與 golangci-lint 建置項目。專案沒有 `.github/workflows` 或其他已啟用的 CI 設定。
 
 ### 修復 / Fixed
+
+- **環境壓縮**: `ApplyCompaction` 會保留壓縮時留下的近期訊息，不再把已摘要的前段又接回去。
 
 - **查詢迴圈**: 工具執行結果會寫入下一輪模型請求，不再在單輪結束時丟棄。拒絕與尚未核准的詢問不會執行工具；允許仍會執行。連續工具回合受 `MaxTurns` 限制，預設 8 輪。
 

@@ -242,9 +242,16 @@ func (c *Compactor) ApplyCompaction(messages []*types.Message, result *Compactio
 	summaryMsg := types.NewUserMessage(result.Summary)
 	summaryMsg.Role = "system"
 
-	// Keep recent messages
-	keepRecent := len(messages) - result.MessagesRemoved
-	recentMessages := messages[keepRecent:]
+	// Keep the same tail Compact left in place. MessagesRemoved counts the
+	// older prefix, so the retained slice starts at that index.
+	start := result.MessagesRemoved
+	if start < 0 {
+		start = 0
+	}
+	if start > len(messages) {
+		start = len(messages)
+	}
+	recentMessages := messages[start:]
 
 	// Build new message list
 	newMessages := []*types.Message{summaryMsg}
