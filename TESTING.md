@@ -526,16 +526,6 @@ go test -bench=. ./internal/tools
 go test -race ./...
 ```
 
-### CI/CD 環境 / CI/CD Environment
-
-```bash
-# GitHub Actions 範例
-- name: Run tests
-  run: |
-    go test -v -coverprofile=coverage.out ./...
-    go tool cover -func=coverage.out
-```
-
 ---
 
 ## 📚 測試最佳實踐 / Testing Best Practices
