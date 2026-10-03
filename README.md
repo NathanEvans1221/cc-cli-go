@@ -92,8 +92,18 @@ cc-cli-go/
 │   │   │   └── grep.go          # Grep tool / Grep 工具
 │   │   ├── read/
 │   │   │   └── read.go          # Read tool / Read 工具
-│   │   └── write/
-│   │       └── write.go         # Write tool / Write 工具
+│   │   ├── write/
+│   │   │   └── write.go         # Write tool / Write 工具
+│   │   ├── webfetch/
+│   │   │   └── webfetch.go
+│   │   ├── websearch/
+│   │   │   └── websearch.go
+│   │   ├── todo/
+│   │   │   └── todo.go
+│   │   ├── notebook/
+│   │   │   └── notebook.go
+│   │   └── agent/
+│   │       └── agent.go
 │   ├── tui/                     # Terminal UI /終端 UI
 │   │   ├── app.go               # Bubble Tea app / Bubble Tea應用
 │   │   └── model.go             # TUI model / TUI 模型
@@ -133,6 +143,11 @@ cc-cli-go/
 - [docs/CORE_FEATURES.md](docs/CORE_FEATURES.md) - Core feature scope and priorities / 核心功能範圍與優先級
 - [docs/TECH_DECISIONS.md](docs/TECH_DECISIONS.md) - ADR-style technical decisions / ADR 形式技術決策
 - [docs/OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md) - Discussion topics, status tracking, and unfinished items / 討論題目、狀態追蹤與未完成事項
+- [docs/API_USAGE.md](docs/API_USAGE.md) - API client, requests, and errors / API 客戶端、請求與錯誤
+- [docs/TOOL_AUTHORING.md](docs/TOOL_AUTHORING.md) - How to add a tool / 如何新增工具
+- [docs/QUERY_FLOW.md](docs/QUERY_FLOW.md) - Query and tool flow / 查詢與工具流程
+- [docs/USER_GUIDE.md](docs/USER_GUIDE.md) - Install, config, run, troubleshooting / 安裝、設定、執行與疑難排解
+- [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) - Development setup and change submission / 開發環境與變更送出
 
 ### Documentation Maintenance Rules / 文件維護規則
 

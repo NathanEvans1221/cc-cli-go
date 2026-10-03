@@ -12,6 +12,12 @@ type Settings struct {
 	Permission PermissionSettings `json:"permission"`
 	Tools      ToolSettings       `json:"tools"`
 	API        APISettings        `json:"api"`
+	UI         UISettings         `json:"ui"`
+}
+
+type UISettings struct {
+	Language string `json:"language"`
+	Theme    string `json:"theme"`
 }
 
 type PermissionSettings struct {
@@ -52,6 +58,10 @@ func DefaultSettings() *Settings {
 		API: APISettings{
 			Model:    "claude-3-5-sonnet-20241022",
 			MaxToken: 4096,
+		},
+		UI: UISettings{
+			Language: "en",
+			Theme:    "12",
 		},
 	}
 }
@@ -184,6 +194,13 @@ func mergeSettings(base, override *Settings) *Settings {
 
 	if override.API.MaxToken > 0 {
 		base.API.MaxToken = override.API.MaxToken
+	}
+
+	if override.UI.Language != "" {
+		base.UI.Language = override.UI.Language
+	}
+	if override.UI.Theme != "" {
+		base.UI.Theme = override.UI.Theme
 	}
 
 	return base

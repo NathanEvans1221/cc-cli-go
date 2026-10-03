@@ -16,17 +16,48 @@ type Client struct {
 	httpClient *http.Client
 }
 
+const maxRequestAttempts = 3
+
 func NewClient(apiKey string) *Client {
 	return &Client{
 		apiKey:  apiKey,
 		baseURL: "https://api.anthropic.com/v1",
 		httpClient: &http.Client{
 			Timeout: 5 * time.Minute,
+			Transport: &http.Transport{
+				MaxIdleConns:        10,
+				MaxIdleConnsPerHost: 4,
+				IdleConnTimeout:     90 * time.Second,
+			},
 		},
 	}
 }
 
 func (c *Client) doRequest(ctx context.Context, method, path string, body interface{}) (*http.Response, error) {
+	var lastErr error
+	for attempt := 1; attempt <= maxRequestAttempts; attempt++ {
+		resp, err := c.doOnce(ctx, method, path, body)
+		if err != nil {
+			lastErr = err
+			if attempt == maxRequestAttempts || ctx.Err() != nil {
+				return nil, err
+			}
+			continue
+		}
+		if resp.StatusCode == http.StatusTooManyRequests || resp.StatusCode == http.StatusServiceUnavailable {
+			resp.Body.Close()
+			lastErr = fmt.Errorf("unexpected status: %d", resp.StatusCode)
+			if attempt == maxRequestAttempts {
+				return nil, lastErr
+			}
+			continue
+		}
+		return resp, nil
+	}
+	return nil, lastErr
+}
+
+func (c *Client) doOnce(ctx context.Context, method, path string, body interface{}) (*http.Response, error) {
 	var reqBody io.Reader
 	if body != nil {
 		jsonBytes, err := json.Marshal(body)

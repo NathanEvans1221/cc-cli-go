@@ -11,6 +11,7 @@ import (
 	envctx "github.com/user-name/cc-cli-go/internal/context"
 	"github.com/user-name/cc-cli-go/internal/permission"
 	"github.com/user-name/cc-cli-go/internal/query"
+	"github.com/user-name/cc-cli-go/internal/render"
 	"github.com/user-name/cc-cli-go/internal/session"
 	"github.com/user-name/cc-cli-go/internal/types"
 )
@@ -35,6 +36,10 @@ type Model struct {
 	session     *session.Session
 	permChecker *permission.Checker
 	permDialog  *PermissionDialog
+
+	language string
+	theme    string
+	notice   string
 }
 
 func InitialModel() Model {
@@ -59,6 +64,8 @@ func InitialModel() Model {
 		contextInfo: contextInfo,
 		session:     session.NewSession(contextInfo.WorkingDir),
 		permChecker: permission.NewChecker(permission.ModeDefault),
+		language:    "en",
+		theme:       "12",
 	}
 }
 
@@ -76,7 +83,7 @@ func InitialModelWithSettings(settings *config.Settings) Model {
 	checker := permission.NewChecker(settings.GetPermissionMode())
 	checker.SetRules(settings.ToPermissionRules())
 
-	return Model{
+	m := Model{
 		input:       input,
 		viewport:    vp,
 		spinner:     s,
@@ -86,7 +93,54 @@ func InitialModelWithSettings(settings *config.Settings) Model {
 		contextInfo: contextInfo,
 		session:     session.NewSession(contextInfo.WorkingDir),
 		permChecker: checker,
+		language:    settings.UI.Language,
+		theme:       settings.UI.Theme,
 	}
+	if m.language == "" {
+		m.language = "en"
+	}
+	if m.theme == "" {
+		m.theme = "12"
+	}
+	return m
+}
+
+func (m *Model) ApplySettings(settings *config.Settings) {
+	if settings == nil {
+		return
+	}
+	if settings.UI.Language != "" {
+		m.language = settings.UI.Language
+	}
+	if settings.UI.Theme != "" {
+		m.theme = settings.UI.Theme
+	}
+}
+
+func (m Model) UserLabel() string {
+	if m.language == "zh-TW" {
+		return "你: "
+	}
+	return "You: "
+}
+
+func (m Model) ProgressLabel() string {
+	if m.language == "zh-TW" {
+		return "思考中..."
+	}
+	return "Thinking..."
+}
+
+func (m Model) Theme() string {
+	if m.theme == "" {
+		return "12"
+	}
+	return m.theme
+}
+
+func (m Model) Complete(prefix string, extra []string) []string {
+	names := []string{"Bash", "Read", "Edit", "Write", "WebFetch", "WebSearch", "TodoWrite", "NotebookEdit"}
+	return render.Complete(prefix, append(names, extra...))
 }
 
 func InitialModelWithSessionAndSettings(sess *session.Session, settings *config.Settings) Model {

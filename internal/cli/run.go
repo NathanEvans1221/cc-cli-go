@@ -16,7 +16,11 @@ import (
 	"github.com/user-name/cc-cli-go/internal/tools/edit"
 	"github.com/user-name/cc-cli-go/internal/tools/glob"
 	"github.com/user-name/cc-cli-go/internal/tools/grep"
+	"github.com/user-name/cc-cli-go/internal/tools/notebook"
 	"github.com/user-name/cc-cli-go/internal/tools/read"
+	"github.com/user-name/cc-cli-go/internal/tools/todo"
+	"github.com/user-name/cc-cli-go/internal/tools/webfetch"
+	"github.com/user-name/cc-cli-go/internal/tools/websearch"
 	"github.com/user-name/cc-cli-go/internal/tools/write"
 	"github.com/user-name/cc-cli-go/internal/tui"
 )
@@ -36,10 +40,26 @@ func init() {
 	runCmd.Flags().StringVar(&resumeFlag, "resume", "", "Resume specific session by ID")
 }
 
+var runTUI = func(model tui.Model) error {
+	p := tea.NewProgram(model)
+	if _, err := p.Run(); err != nil {
+		return fmt.Errorf("run TUI: %w", err)
+	}
+	return nil
+}
+
 func runInteractive(cmd *cobra.Command, args []string) error {
+	model, err := prepareInteractive()
+	if err != nil {
+		return err
+	}
+	return runTUI(model)
+}
+
+func prepareInteractive() (tui.Model, error) {
 	apiKey := os.Getenv("ANTHROPIC_API_KEY")
 	if apiKey == "" {
-		return fmt.Errorf("ANTHROPIC_API_KEY environment variable is required")
+		return tui.Model{}, fmt.Errorf("ANTHROPIC_API_KEY environment variable is required")
 	}
 
 	settings, err := config.Load()
@@ -64,6 +84,10 @@ func runInteractive(cmd *cobra.Command, args []string) error {
 	toolReg.Register(write.New())
 	toolReg.Register(glob.New())
 	toolReg.Register(grep.New())
+	toolReg.Register(webfetch.New())
+	toolReg.Register(websearch.New())
+	toolReg.Register(todo.New())
+	toolReg.Register(notebook.New())
 
 	engine := query.NewEngine(client, toolReg)
 
@@ -89,11 +113,6 @@ func runInteractive(cmd *cobra.Command, args []string) error {
 	}
 
 	model.QueryEngine = engine
-
-	p := tea.NewProgram(model)
-	if _, err := p.Run(); err != nil {
-		return fmt.Errorf("run TUI: %w", err)
-	}
-
-	return nil
+	model.ApplySettings(settings)
+	return model, nil
 }

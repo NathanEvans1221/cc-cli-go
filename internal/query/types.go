@@ -1,6 +1,8 @@
 package query
 
 import (
+	"time"
+
 	"github.com/user-name/cc-cli-go/internal/permission"
 	"github.com/user-name/cc-cli-go/internal/tools"
 	"github.com/user-name/cc-cli-go/internal/types"
@@ -13,6 +15,7 @@ type QueryParams struct {
 	Model             string
 	MaxTokens         int
 	MaxTurns          int
+	ToolTimeout       time.Duration
 	PermissionChecker *permission.Checker
 }
 

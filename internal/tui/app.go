@@ -8,8 +8,10 @@ import (
 	"github.com/charmbracelet/lipgloss"
 
 	"github.com/user-name/cc-cli-go/internal/api"
+	apperr "github.com/user-name/cc-cli-go/internal/errors"
 	"github.com/user-name/cc-cli-go/internal/permission"
 	"github.com/user-name/cc-cli-go/internal/query"
+	"github.com/user-name/cc-cli-go/internal/render"
 	"github.com/user-name/cc-cli-go/internal/types"
 )
 
@@ -104,6 +106,13 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	case QueryResultMsg:
 		m.loading = false
+		if msg.Error != nil {
+			text := msg.Error.Error()
+			if typed, ok := msg.Error.(*apperr.Error); ok {
+				text = typed.UserMessage()
+			}
+			m.notice = text
+		}
 		m.session.Save()
 		return m, nil
 	}
@@ -137,7 +146,12 @@ func (m Model) View() string {
 
 	if m.loading {
 		b.WriteString(m.spinner.View())
-		b.WriteString(" Thinking...")
+		b.WriteString(" ")
+		b.WriteString(m.ProgressLabel())
+		b.WriteString("\n")
+	}
+	if m.notice != "" {
+		b.WriteString(m.notice)
 		b.WriteString("\n")
 	}
 
@@ -213,8 +227,8 @@ func (m Model) renderMessage(msg *types.Message) string {
 
 	switch msg.Type {
 	case types.MessageTypeUser:
-		style = lipgloss.NewStyle().Foreground(lipgloss.Color("12"))
-		prefix = "You: "
+		style = lipgloss.NewStyle().Foreground(lipgloss.Color(m.Theme()))
+		prefix = m.UserLabel()
 	case types.MessageTypeAssistant:
 		style = lipgloss.NewStyle().Foreground(lipgloss.Color("10"))
 		prefix = "Claude: "
@@ -223,7 +237,7 @@ func (m Model) renderMessage(msg *types.Message) string {
 	var content string
 	for _, block := range msg.Content {
 		if block.Type == "text" {
-			content += block.Text
+			content += render.Markdown(block.Text)
 		}
 	}
 

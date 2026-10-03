@@ -6,6 +6,12 @@ import (
 	"testing"
 )
 
+type Tester interface {
+	Helper()
+	Errorf(format string, args ...interface{})
+	Error(args ...interface{})
+}
+
 func TempFile(t *testing.T, content string) string {
 	t.Helper()
 
@@ -40,7 +46,7 @@ func TempDirWithFiles(t *testing.T, files map[string]string) string {
 	return tmpDir
 }
 
-func AssertEqual(t *testing.T, expected, actual interface{}) {
+func AssertEqual(t Tester, expected, actual interface{}) {
 	t.Helper()
 
 	if expected != actual {
@@ -48,7 +54,7 @@ func AssertEqual(t *testing.T, expected, actual interface{}) {
 	}
 }
 
-func AssertContains(t *testing.T, s, substr string) {
+func AssertContains(t Tester, s, substr string) {
 	t.Helper()
 
 	if !contains(s, substr) {
@@ -56,7 +62,7 @@ func AssertContains(t *testing.T, s, substr string) {
 	}
 }
 
-func AssertError(t *testing.T, err error) {
+func AssertError(t Tester, err error) {
 	t.Helper()
 
 	if err == nil {
@@ -64,7 +70,7 @@ func AssertError(t *testing.T, err error) {
 	}
 }
 
-func AssertNoError(t *testing.T, err error) {
+func AssertNoError(t Tester, err error) {
 	t.Helper()
 
 	if err != nil {

@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+### 文件 / Documentation
+
+- **指南**: 新增 API 使用、工具開發、查詢流程、使用者與參與指南，並從 README 索引連結。
+- **待辦同步**: `TODO.md` 與 issue #1、#3、#4、#5、#6 的清單改為已完成項目。CI/CD（issue #2）維持關閉。
+
+### 新增功能 / Added
+
+- **API**: 客戶端重用連線，並對傳輸失敗、HTTP 429 與 503 最多重試 3 次。
+- **工具**: 新增 WebFetch、WebSearch（需注入端點）、TodoWrite、NotebookEdit 與單次委派的 Agent。查詢可對工具設定逾時。
+- **介面**: Markdown 標題與行內程式碼、Go 關鍵字標記、工具名稱與路徑補全、主題色、查詢中的進度文字，以及 `ui.language` 對使用者標籤的切換。錯誤建議會顯示在畫面上。
+
 ### 測試 / Tests
 
 - **覆蓋率**: 為 `cli`、`compact`、`errors`、`types`、`tools` registry、`testutil` 補上單元測試，並為 API 串流與 TUI 啟動、按鍵、權限對話補上可執行路徑。

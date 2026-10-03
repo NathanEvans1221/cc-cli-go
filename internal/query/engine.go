@@ -24,6 +24,10 @@ type Engine struct {
 }
 
 func NewEngine(client *api.Client, toolReg *tools.Registry) *Engine {
+	return NewEngineWithStreamer(client, toolReg)
+}
+
+func NewEngineWithStreamer(client streamer, toolReg *tools.Registry) *Engine {
 	return &Engine{
 		client:  client,
 		toolReg: toolReg,
@@ -191,6 +195,12 @@ func (e *Engine) executeTools(ctx context.Context, toolUses []types.ContentBlock
 			}
 
 			input, _ := toolUse.Input.(map[string]interface{})
+			execCtx := ctx
+			if params.ToolTimeout > 0 {
+				var cancel context.CancelFunc
+				execCtx, cancel = context.WithTimeout(ctx, params.ToolTimeout)
+				defer cancel()
+			}
 
 			if params.PermissionChecker != nil {
 				decision := params.PermissionChecker.Check(toolUse.Name, input)
@@ -224,7 +234,7 @@ func (e *Engine) executeTools(ctx context.Context, toolUses []types.ContentBlock
 				}
 			}
 
-			result, err := tool.Execute(ctx, input, &tools.ToolContext{})
+			result, err := tool.Execute(execCtx, input, &tools.ToolContext{AbortSignal: execCtx})
 			if err != nil {
 				result = &tools.ToolResult{
 					Content: err.Error(),

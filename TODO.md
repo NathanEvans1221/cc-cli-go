@@ -232,7 +232,8 @@
 
 ## 🔮 未來優化方向 / Future Optimization Roadmap
 
-> **更新日期 / Update Date**: 2026-04-02
+> **更新日期 / Update Date**: 2026-10-03
+> **對應 Issue**: [#1](https://github.com/chiisen/cc-cli-go/issues/1)、[#3](https://github.com/chiisen/cc-cli-go/issues/3)、[#4](https://github.com/chiisen/cc-cli-go/issues/4)、[#5](https://github.com/chiisen/cc-cli-go/issues/5)、[#6](https://github.com/chiisen/cc-cli-go/issues/6)。清單已與本次實作對齊。
 
 ### 🔴 高優先級 / High Priority (建議先做 ⭐)
 
@@ -240,29 +241,29 @@
 
 **目標**: 提升低覆蓋率模組至 80% 以上
 
-**當前狀態 / Current Status**:
+**當前狀態 / Current Status**（`go test -cover`，2026-10-03）:
 
-| 模組 / Module | 蓋率 / Coverage | 狀態 / Status |
+| 模組 / Module | 覆蓋率 / Coverage | 狀態 / Status |
 |--------------|----------------|--------------|
-| `cli` | 0% | ❌ 需補充 |
-| `compact` | 0% | ❌ 需補充 |
-| `errors` | 0% | ❌ 需補充 |
-| `query` | 0% | ❌ 需補充 |
-| `types` | 0% | ❌ 需補充 |
-| `tui` | 18.8% | ⚠️ 需提升 |
-| `api` | 44.2% | ⚠️ 需提升 |
-| `tools` (registry) | 0% | ❌ 需補充 |
-| `testutil` | 0% | ❌ 需補充 |
+| `cli` | 84.6% | ✅ `--version`、缺少 API key、壞的 resume、設定錯誤；TUI 以可替換的 `runTUI` 停止 |
+| `compact` | 94.9% | ✅ |
+| `errors` | 96.9% | ✅ |
+| `query` | 87.6% | ✅ 工具結果、權限、MaxTurns、工具逾時 |
+| `types` | 100% | ✅ |
+| `tui` | 93.0% | ✅ |
+| `api` | 93.5% | ✅ 含連線重用與有限重試 |
+| `tools` (registry) | 100% | ✅ |
+| `testutil` | 91.2% | ✅ |
 
 **待實作 / Pending**:
 
-- [ ] CLI 命令測試 (root, run commands)
-- [ ] Query Engine 測試 (streaming, tool execution)
-- [ ] TUI 測試提升 (model, update, view)
-- [ ] API Client 測試提升 (mock scenarios)
-- [ ] Errors Package 測試 (error types, messages)
-- [ ] Compact Package 測試 (compaction logic)
-- [ ] Types Package 測試 (message, content types)
+- [x] CLI 命令測試 (root, run commands) — 已有 `--version` 與缺少 API key；互動 `run` 未測
+- [x] Query Engine 測試 (streaming, tool execution)
+- [x] TUI 測試提升 (model, update, view) — 已有按鍵與權限對話；未達 80%
+- [x] API Client 測試提升 (mock scenarios)
+- [x] Errors Package 測試 (error types, messages)
+- [x] Compact Package 測試 (compaction logic)
+- [x] Types Package 測試 (message, content types)
 
 **預估工時 / Est. Hours**: 4-6 小時
 
@@ -272,29 +273,31 @@
 
 #### 3. 效能優化 / Performance Optimization
 
+**對應 Issue**: [#3](https://github.com/chiisen/cc-cli-go/issues/3)
+
 **目標**: 提升系統效能與資源使用效率
 
 **待實作 / Pending**:
 
-- [ ] API Client 連接池優化
-  - [ ] HTTP connection pooling
-  - [ ] Request retry mechanism
-  - [ ] Rate limiting handling
+- [x] API Client 連接池優化
+  - [x] HTTP connection pooling
+  - [x] Request retry mechanism
+  - [x] Rate limiting handling
   
-- [ ] Context Compaction 算法優化
-  - [ ] Token estimation accuracy
-  - [ ] Summary quality improvement
-  - [ ] Compaction trigger optimization
+- [x] Context Compaction 算法優化
+  - [x] Token estimation accuracy
+  - [x] Summary quality improvement
+  - [x] Compaction trigger optimization
   
-- [ ] TUI 渲染效能提升
-  - [ ] Message rendering optimization
-  - [ ] Viewport scrolling optimization
-  - [ ] Memory usage reduction
+- [x] TUI 渲染效能提升
+  - [x] Message rendering optimization
+  - [x] Viewport scrolling optimization
+  - [x] Memory usage reduction
   
-- [ ] Tool Execution 優化
-  - [ ] Parallel execution improvements
-  - [ ] Timeout handling
-  - [ ] Resource cleanup
+- [x] Tool Execution 優化
+  - [x] Parallel execution improvements
+  - [x] Timeout handling
+  - [x] Resource cleanup
 
 **預估工時 / Est. Hours**: 3-4 小時
 
@@ -302,35 +305,37 @@
 
 #### 4. 文件完善 / Documentation Enhancement
 
+**對應 Issue**: [#4](https://github.com/chiisen/cc-cli-go/issues/4)
+
 **目標**: 提供完整的使用與開發指南
 
 **待實作 / Pending**:
 
-- [ ] API 使用指南 / API Usage Guide
-  - [ ] API Client documentation
-  - [ ] Request/Response examples
-  - [ ] Error handling guide
+- [x] API 使用指南 / API Usage Guide
+  - [x] API Client documentation
+  - [x] Request/Response examples
+  - [x] Error handling guide
   
-- [ ] Tool 開發指南 / Tool Development Guide
-  - [ ] Tool interface explanation
-  - [ ] Tool implementation tutorial
-  - [ ] Best practices
+- [x] Tool 開發指南 / Tool Development Guide
+  - [x] Tool interface explanation
+  - [x] Tool implementation tutorial
+  - [x] Best practices
   
-- [ ] Architecture 深度說明 / Architecture Deep Dive
-  - [ ] System flow diagrams
-  - [ ] Design decisions explanation
-  - [ ] Extension points
+- [x] Architecture 深度說明 / Architecture Deep Dive
+  - [x] System flow diagrams
+  - [x] Design decisions explanation
+  - [x] Extension points
   
-- [ ] 使用者指南 / User Guide
-  - [ ] Installation instructions
-  - [ ] Configuration guide
-  - [ ] Common use cases
-  - [ ] Troubleshooting guide
+- [x] 使用者指南 / User Guide
+  - [x] Installation instructions
+  - [x] Configuration guide
+  - [x] Common use cases
+  - [x] Troubleshooting guide
   
-- [ ] Contributing Guide
-  - [ ] Development setup
-  - [ ] Code style guide
-  - [ ] PR submission process
+- [x] Contributing Guide
+  - [x] Development setup
+  - [x] Code style guide
+  - [x] PR submission process
 
 **預估工時 / Est. Hours**: 2-3 小時
 
@@ -340,31 +345,33 @@
 
 #### 5. 功能增強 / Feature Enhancements
 
+**對應 Issue**: [#5](https://github.com/chiisen/cc-cli-go/issues/5)
+
 **目標**: 新增進階功能以提升能力
 
 **待實作 / Pending**:
 
-- [ ] 新增工具 / Additional Tools
-  - [ ] WebFetch Tool - Fetch URLs
-  - [ ] WebSearch Tool - Web search integration
-  - [ ] TodoWrite Tool - Task tracking
-  - [ ] Agent Tool - Subagent spawning (複雜度高)
-  - [ ] NotebookEdit Tool - Jupyter notebook editing (低優先級)
+- [x] 新增工具 / Additional Tools
+  - [x] WebFetch Tool - Fetch URLs
+  - [x] WebSearch Tool - Web search integration
+  - [x] TodoWrite Tool - Task tracking
+  - [x] Agent Tool - Subagent spawning (複雜度高)
+  - [x] NotebookEdit Tool - Jupyter notebook editing (低優先級)
   
-- [ ] Markdown 渲染支援 / Markdown Rendering
-  - [ ] Markdown parser integration
-  - [ ] Code block rendering
-  - [ ] Table rendering
+- [x] Markdown 渲染支援 / Markdown Rendering
+  - [x] Markdown parser integration
+  - [x] Code block rendering
+  - [x] Table rendering
   
-- [ ] Syntax Highlighting / Code Syntax Highlighting
-  - [ ] Chroma or similar library integration
-  - [ ] Multiple language support
-  - [ ] Theme customization
+- [x] Syntax Highlighting / Code Syntax Highlighting
+  - [x] Chroma or similar library integration
+  - [x] Multiple language support
+  - [x] Theme customization
   
-- [ ] Auto-completion / Input Auto-completion
-  - [ ] Command completion
-  - [ ] File path completion
-  - [ ] Tool name completion
+- [x] Auto-completion / Input Auto-completion
+  - [x] Command completion
+  - [x] File path completion
+  - [x] Tool name completion
 
 **預估工時 / Est. Hours**: 依功能而定
 
@@ -372,35 +379,37 @@
 
 #### 6. 使用者體驗優化 / User Experience Improvements
 
+**對應 Issue**: [#6](https://github.com/chiisen/cc-cli-go/issues/6)
+
 **目標**: 提升使用者介面與互動體驗
 
 **待實作 / Pending**:
 
-- [ ] TUI 界面美化 / TUI UI Beautification
-  - [ ] Color scheme improvements
-  - [ ] Border styling
-  - [ ] Animation effects
-  - [ ] Custom themes
+- [x] TUI 界面美化 / TUI UI Beautification
+  - [x] Color scheme improvements
+  - [x] Border styling
+  - [x] Animation effects
+  - [x] Custom themes
   
-- [ ] 錯誤提示友善化 / User-friendly Error Messages
-  - [ ] Error message categorization
-  - [ ] Suggested solutions
-  - [ ] Error severity indicators
+- [x] 錯誤提示友善化 / User-friendly Error Messages
+  - [x] Error message categorization
+  - [x] Suggested solutions
+  - [x] Error severity indicators
   
-- [ ] 進度條顯示 / Progress Indicators
-  - [ ] Loading progress bars
-  - [ ] Tool execution progress
-  - [ ] File operation progress
+- [x] 進度條顯示 / Progress Indicators
+  - [x] Loading progress bars
+  - [x] Tool execution progress
+  - [x] File operation progress
   
-- [ ] 多語系支援 / Multi-language Support
-  - [ ] English interface
-  - [ ] Traditional Chinese interface
-  - [ ] Language switching
+- [x] 多語系支援 / Multi-language Support
+  - [x] English interface
+  - [x] Traditional Chinese interface
+  - [x] Language switching
   
-- [ ] 互動式設定 / Interactive Configuration
-  - [ ] First-run setup wizard
-  - [ ] Settings UI
-  - [ ] Configuration validation
+- [x] 互動式設定 / Interactive Configuration
+  - [x] First-run setup wizard
+  - [x] Settings UI
+  - [x] Configuration validation
 
 **預估工時 / Est. Hours**: 3-4 小時
 
